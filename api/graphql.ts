@@ -12,6 +12,8 @@ const typeDefs = gql`
     id: ID!
     name: String
     affiliate: String
+    photo: String
+    country: String
   }
 `;
 
@@ -22,6 +24,16 @@ const resolvers = {
         `${apiUrl}/competitions/open/2020/athletes?term=${args.name}`
       );
       return data;
+    }
+  },
+  Athlete: {
+    photo: async ({ id }, args, context) => {
+      const { data } = await axios.get(`${apiUrl}/athlete/${id}`);
+      return data.profilePicS3key;
+    },
+    country: async ({ id }, args, context) => {
+      const { data } = await axios.get(`${apiUrl}/athlete/${id}`);
+      return data.countryId;
     }
   }
 };

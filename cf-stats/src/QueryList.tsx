@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+import QueryItem from "./QueryItem";
 
 const ATHLETES = gql`
   query GetAthletes($name: String!) {
@@ -9,6 +10,8 @@ const ATHLETES = gql`
       id
       name
       affiliate
+      photo
+      country
     }
   }
 `;
@@ -24,16 +27,13 @@ export default function QueryList({ query }) {
 
   return (
     <View style={styles.container}>
-      {data &&
-        data.athletes.map(item => <Text key={item.id}>{item.name}</Text>)}
+      {data && data.athletes.map(item => <QueryItem key={item.id} {...item} />)}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    padding: 6
   }
 });

@@ -4,7 +4,8 @@
   "description": "Serverless webpack example using Typescript",
   "main": "graphql.ts",
   "scripts": {
-    "start": "sls offline"
+    "start": "sls offline",
+    "deploy": "sls deploy"
   },
   "dependencies": {
     "apollo-server-lambda": "^2.10.1",
