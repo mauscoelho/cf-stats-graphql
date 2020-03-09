@@ -27,7 +27,9 @@ export default function QueryList({ query }) {
 
   return (
     <View style={styles.container}>
-      {data && data.athletes.map(item => <QueryItem key={item.id} {...item} />)}
+      {data?.athletes.map(item => (
+        <QueryItem key={item.id} {...item} />
+      ))}
     </View>
   );
 }
