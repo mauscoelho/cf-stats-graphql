@@ -898,13 +898,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@callstack/async-storage@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@callstack/async-storage/-/async-storage-2.0.3.tgz#93fc98f768926024fe01d759acaba6c80feb5727"
-  integrity sha512-JK/cV/nRHdYDdBmT0GZ7otywZXFNpWMuzjkGgeyhd/Pc+alpaSspg73U6lxFBM5ndnY+T1iQ3RSfUZl3QG+nwQ==
-  dependencies:
-    lodash.merge "^4.6.0"
-
 "@callstack/react-theme-provider@^3.0.5":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.5.tgz#a173e455e9603c9c45357a3b6ace1273086527ca"
@@ -3497,11 +3490,6 @@ locate-path@^5.0.0:
   integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
   dependencies:
     p-locate "^4.1.0"
-
-lodash.merge@^4.6.0:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
-  integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
 lodash.throttle@^4.1.1:
   version "4.1.1"

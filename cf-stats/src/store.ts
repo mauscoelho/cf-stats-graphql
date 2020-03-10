@@ -1,4 +1,4 @@
-import AsyncStorage from "@callstack/async-storage";
+import { AsyncStorage } from "react-native";
 
 const STORE_MY_ATHLETES = "@cf:athletes";
 
