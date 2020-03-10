@@ -1,19 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, Title, Button } from "react-native-paper";
-import { followAthlete } from "./store";
 
 export default function QueryItem({
   id,
   name,
   photo,
   countryEmoji,
-  affiliate
+  affiliate,
+  following,
+  onFollow
 }) {
-  async function onFollow() {
-    await followAthlete(id);
-  }
-
   return (
     <View style={styles.container}>
       <Avatar.Image source={{ uri: photo }} />
@@ -22,8 +19,12 @@ export default function QueryItem({
         <Text>{affiliate}</Text>
         <Text>{countryEmoji}</Text>
       </View>
-      <Button mode="contained" onPress={onFollow}>
-        Follow
+      <Button
+        disabled={following}
+        mode={following ? "outlined" : "contained"}
+        onPress={() => onFollow(id)}
+      >
+        {following ? "Following" : "Follow"}
       </Button>
     </View>
   );

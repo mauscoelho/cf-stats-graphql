@@ -16,7 +16,7 @@ const ATHLETES = gql`
   }
 `;
 
-export default function QueryList({ query }) {
+export default function QueryList({ query, followingIds, onFollow }) {
   const { loading, error, data } = useQuery(ATHLETES, {
     variables: { name: query },
     skip: !query
@@ -25,15 +25,20 @@ export default function QueryList({ query }) {
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error :(</Text>;
 
-  //todo
-  // map data array
-  // receive following from props and check
-  // pass following as prop
+  function isFollowing(id) {
+    return followingIds.find(item => item === id);
+  }
+
+  const athletes =
+    data?.athletes.map(item => ({
+      ...item,
+      following: isFollowing(item.id)
+    })) || [];
 
   return (
     <View style={styles.container}>
-      {data?.athletes.map(item => (
-        <QueryItem key={item.id} {...item} />
+      {athletes.map(item => (
+        <QueryItem key={item.id} {...item} onFollow={onFollow} />
       ))}
     </View>
   );

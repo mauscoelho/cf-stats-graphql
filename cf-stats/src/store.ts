@@ -1,6 +1,6 @@
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@callstack/async-storage";
 
-const STORE_MY_ATHLETES = "@cfstats:athletes";
+const STORE_MY_ATHLETES = "@cf:athletes";
 
 export async function followAthlete(id) {
   try {
@@ -18,4 +18,9 @@ export async function followAthlete(id) {
   } catch (error) {
     throw new Error(`Error on following new Athlete ${id}`);
   }
+}
+
+export async function getFollowingAthletes() {
+  const jsonIds = await AsyncStorage.getItem(STORE_MY_ATHLETES);
+  return jsonIds ? JSON.parse(jsonIds) : [];
 }

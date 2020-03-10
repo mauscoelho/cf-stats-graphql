@@ -1,10 +1,25 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Searchbar } from "react-native-paper";
+import React, { useEffect } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { Searchbar, Title } from "react-native-paper";
 import QueryList from "./QueryList";
+import { getFollowingAthletes, followAthlete } from "./store";
 
 export default function HomeScreen() {
   const [query, setQuery] = React.useState("");
+  const [followingIds, setFollowingIds] = React.useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      const ids = await getFollowingAthletes();
+      setFollowingIds(ids);
+    }
+    getData();
+  }, []);
+
+  async function onFollow(id) {
+    setFollowingIds([id, ...followingIds]);
+    await followAthlete(id);
+  }
 
   return (
     <View style={styles.home}>
@@ -13,7 +28,20 @@ export default function HomeScreen() {
         onChangeText={query => setQuery(query)}
         value={query}
       />
-      <QueryList query={query}></QueryList>
+      {query ? (
+        <QueryList
+          query={query}
+          followingIds={followingIds}
+          onFollow={id => onFollow(id)}
+        ></QueryList>
+      ) : (
+        <View>
+          <Title>My Athletes</Title>
+          {followingIds.map(id => (
+            <Text>{id}</Text>
+          ))}
+        </View>
+      )}
     </View>
   );
 }
