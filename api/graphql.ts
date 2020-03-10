@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from "apollo-server-lambda";
 import axios from "axios";
+import flag from "country-code-emoji";
 
 const apiUrl = "https://games.crossfit.com/competitions/api/v1";
 
@@ -14,6 +15,7 @@ const typeDefs = gql`
     affiliate: String
     photo: String
     country: String
+    countryEmoji: String
   }
 `;
 
@@ -34,6 +36,10 @@ const resolvers = {
     country: async ({ id }, args, context) => {
       const { data } = await axios.get(`${apiUrl}/athlete/${id}`);
       return data.countryId;
+    },
+    countryEmoji: async ({ id }, args, context) => {
+      const { data } = await axios.get(`${apiUrl}/athlete/${id}`);
+      return flag(data.countryId);
     }
   }
 };

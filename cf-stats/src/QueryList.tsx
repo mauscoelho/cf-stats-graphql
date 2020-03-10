@@ -11,7 +11,7 @@ const ATHLETES = gql`
       name
       affiliate
       photo
-      country
+      countryEmoji
     }
   }
 `;
@@ -25,6 +25,11 @@ export default function QueryList({ query }) {
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error :(</Text>;
 
+  //todo
+  // map data array
+  // receive following from props and check
+  // pass following as prop
+
   return (
     <View style={styles.container}>
       {data?.athletes.map(item => (
@@ -36,6 +41,6 @@ export default function QueryList({ query }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 6
+    padding: 10
   }
 });
