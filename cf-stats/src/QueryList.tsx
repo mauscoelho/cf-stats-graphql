@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, FlatList, SafeAreaView } from "react-native";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
-import QueryItem from "./QueryItem";
+import QueryItem, { QueryItemProps } from "./QueryItem";
 
 const ATHLETES = gql`
   query GetAthletes($name: String!) {
@@ -29,23 +29,31 @@ export default function QueryList({ query, followingIds, onFollow }) {
     return followingIds.find(item => item === id);
   }
 
-  const athletes =
+  const athletes: QueryItemProps[] =
     data?.athletes.map(item => ({
       ...item,
       following: isFollowing(item.id)
     })) || [];
 
   return (
-    <View style={styles.container}>
-      {athletes.map(item => (
-        <QueryItem key={item.id} {...item} onFollow={onFollow} />
-      ))}
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        style={styles.list}
+        data={athletes}
+        renderItem={item => (
+          <QueryItem key={item.item.id} {...item.item} onFollow={onFollow} />
+        )}
+        keyExtractor={item => item.id}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  list: {
     padding: 10
+  },
+  container: {
+    flex: 1
   }
 });

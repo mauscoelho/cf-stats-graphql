@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, SafeAreaView, FlatList } from "react-native";
 import { Searchbar, Title } from "react-native-paper";
 import QueryList from "./QueryList";
 import { getFollowingAthletes, followAthlete, unfollowAthlete } from "./store";
@@ -7,7 +7,7 @@ import Athlete from "./Athlete";
 
 export default function HomeScreen() {
   const [query, setQuery] = React.useState("");
-  const [followingIds, setFollowingIds] = React.useState([]);
+  const [followingIds, setFollowingIds] = React.useState<string[]>([]);
 
   useEffect(() => {
     async function getData() {
@@ -40,12 +40,16 @@ export default function HomeScreen() {
     }
     if (followingIds.length) {
       return (
-        <View>
-          <Title>My Athletes</Title>
-          {followingIds.map(id => (
-            <Athlete id={id} onUnfollow={onUnfollow} />
-          ))}
-        </View>
+        <SafeAreaView style={styles.container}>
+          <FlatList
+            style={styles.list}
+            data={followingIds}
+            renderItem={item => (
+              <Athlete id={item.item} onUnfollow={onUnfollow} />
+            )}
+            keyExtractor={item => item}
+          />
+        </SafeAreaView>
       );
     }
 
@@ -57,7 +61,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.home}>
+    <View style={styles.container}>
       <Searchbar
         placeholder="Search"
         onChangeText={query => setQuery(query)}
@@ -69,12 +73,15 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  list: {
+    padding: 10
+  },
   center: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
-  },
-  home: {
-    flex: 1
   }
 });

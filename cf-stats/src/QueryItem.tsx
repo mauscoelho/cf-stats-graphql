@@ -2,7 +2,17 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Avatar, Title, Button } from "react-native-paper";
 
-export default function QueryItem({
+export interface QueryItemProps {
+  id: string;
+  name: string;
+  affiliate: string;
+  photo: string;
+  countryEmoji: string;
+  following: boolean;
+  onFollow: any;
+}
+
+export default function QueryItemProps({
   id,
   name,
   photo,
