@@ -7,6 +7,7 @@ const apiUrl = "https://games.crossfit.com/competitions/api/v1";
 const typeDefs = gql`
   type Query {
     athletes(name: String!): [Athlete]
+    athlete(id: String!): Athlete
   }
 
   type Athlete {
@@ -26,6 +27,14 @@ const resolvers = {
         `${apiUrl}/competitions/open/2020/athletes?term=${args.name}`
       );
       return data;
+    },
+    athlete: async (parent, { id }, context) => {
+      const { data } = await axios.get(`${apiUrl}/athlete/${id}`);
+      return {
+        id: data.competitorId,
+        name: data.competitorName,
+        affiliate: data.affiliateName
+      };
     }
   },
   Athlete: {
