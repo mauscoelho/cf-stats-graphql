@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Searchbar, Title } from "react-native-paper";
 import QueryList from "./QueryList";
-import { getFollowingAthletes, followAthlete } from "./store";
+import { getFollowingAthletes, followAthlete, unfollowAthlete } from "./store";
+import Athlete from "./Athlete";
 
 export default function HomeScreen() {
   const [query, setQuery] = React.useState("");
@@ -21,6 +22,40 @@ export default function HomeScreen() {
     await followAthlete(id);
   }
 
+  async function onUnfollow(id) {
+    const newIds = followingIds.filter(item => item !== id);
+    setFollowingIds([...newIds]);
+    await unfollowAthlete(id);
+  }
+
+  function renderContainer() {
+    if (query) {
+      return (
+        <QueryList
+          query={query}
+          followingIds={followingIds}
+          onFollow={id => onFollow(id)}
+        ></QueryList>
+      );
+    }
+    if (followingIds.length) {
+      return (
+        <View>
+          <Title>My Athletes</Title>
+          {followingIds.map(id => (
+            <Athlete id={id} onUnfollow={onUnfollow} />
+          ))}
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.center}>
+        <Text>Search and follow an Athlete to start 💪</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.home}>
       <Searchbar
@@ -28,25 +63,17 @@ export default function HomeScreen() {
         onChangeText={query => setQuery(query)}
         value={query}
       />
-      {query ? (
-        <QueryList
-          query={query}
-          followingIds={followingIds}
-          onFollow={id => onFollow(id)}
-        ></QueryList>
-      ) : (
-        <View>
-          <Title>My Athletes</Title>
-          {followingIds.map(id => (
-            <Text>{id}</Text>
-          ))}
-        </View>
-      )}
+      {renderContainer()}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
   home: {
     flex: 1
   }
