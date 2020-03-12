@@ -49,8 +49,14 @@ export default function Athlete({ id, onUnfollow }) {
           <View style={styles.overview}>
             <Text>{`${stat.name} ${stat.year}`}</Text>
             <Text>{`🌎 ${stat.worldWideRank}`}</Text>
-            <Text>{`🇧🇷 ${stat.countryRank}`}</Text>
-            <Text>{`📦 ${stat.affiliateRank}`}</Text>
+            <Text>
+              {stat.countryRank
+                ? `${data.athlete.countryEmoji} ${stat.countryRank}`
+                : `🤔`}
+            </Text>
+            <Text>
+              {stat.affiliateRank ? `📦 ${stat.affiliateRank}` : `🤔`}
+            </Text>
             <Button>Workouts</Button>
           </View>
         ))}
