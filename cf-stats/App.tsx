@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ApolloProvider } from "@apollo/react-hooks";
 import HomeScreen from "./src/HomeScreen";
+import DetailsScreen from "./src/DetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Details" component={DetailsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

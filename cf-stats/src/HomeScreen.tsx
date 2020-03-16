@@ -3,9 +3,9 @@ import { StyleSheet, View, Text, SafeAreaView, FlatList } from "react-native";
 import { Searchbar, Title } from "react-native-paper";
 import QueryList from "./QueryList";
 import { getFollowingAthletes, followAthlete, unfollowAthlete } from "./store";
-import Athlete from "./Athlete";
+import HomeItem from "./HomeItem";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [query, setQuery] = React.useState("");
   const [followingIds, setFollowingIds] = React.useState<string[]>([]);
 
@@ -28,6 +28,10 @@ export default function HomeScreen() {
     await unfollowAthlete(id);
   }
 
+  function onPress(id) {
+    navigation.navigate("Details");
+  }
+
   function renderContainer() {
     if (query) {
       return (
@@ -44,7 +48,7 @@ export default function HomeScreen() {
           <FlatList
             data={followingIds}
             renderItem={item => (
-              <Athlete id={item.item} onUnfollow={onUnfollow} />
+              <HomeItem id={item.item} onPress={() => onPress(1)} />
             )}
             keyExtractor={item => item}
           />
