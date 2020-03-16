@@ -42,7 +42,6 @@ export default function HomeScreen() {
       return (
         <SafeAreaView style={styles.container}>
           <FlatList
-            style={styles.list}
             data={followingIds}
             renderItem={item => (
               <Athlete id={item.item} onUnfollow={onUnfollow} />
@@ -75,9 +74,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  list: {
-    padding: 10
   },
   center: {
     flex: 1,

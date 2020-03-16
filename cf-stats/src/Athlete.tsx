@@ -33,33 +33,28 @@ export default function Athlete({ id, onUnfollow }) {
 
   return (
     <View style={styles.main}>
-      <View style={styles.container}>
+      <View style={styles.leftContainer}>
         <Avatar.Image source={{ uri: data.athlete.photo }} />
-        <View style={styles.dataContainer}>
-          <Title>{data.athlete.name}</Title>
-          <Text>{data.athlete.affiliate}</Text>
-          <Text>{data.athlete.countryEmoji}</Text>
-        </View>
-        <Button mode="outlined" onPress={() => onUnfollow(id)}>
-          Unfollow
-        </Button>
       </View>
-      <View style={styles.overviewContainer}>
-        {data.athlete.stats.map(stat => (
-          <View style={styles.overview}>
-            <Text>{`${stat.name} ${stat.year}`}</Text>
-            <Text>{`🌎 ${stat.worldWideRank}`}</Text>
-            <Text>
-              {stat.countryRank
-                ? `${data.athlete.countryEmoji} ${stat.countryRank}`
-                : `🤔`}
-            </Text>
-            <Text>
-              {stat.affiliateRank ? `📦 ${stat.affiliateRank}` : `🤔`}
-            </Text>
-            <Button>Workouts</Button>
-          </View>
-        ))}
+
+      <View style={styles.middleContainer}>
+        <Title>{`${data.athlete.name}`}</Title>
+        <Text>
+          {data.athlete.affiliate}
+          <Text
+            style={styles.bold}
+          >{` #${data.athlete.stats[0].affiliateRank}`}</Text>
+        </Text>
+        <Text
+          style={styles.bold}
+        >{`${data.athlete.countryEmoji} #${data.athlete.stats[0].countryRank}`}</Text>
+      </View>
+
+      <View style={styles.rightContainer}>
+        <Text>Worldwide</Text>
+        <Title style={styles.bold}>
+          #{data.athlete.stats[0].worldWideRank}
+        </Title>
       </View>
     </View>
   );
@@ -67,23 +62,23 @@ export default function Athlete({ id, onUnfollow }) {
 
 const styles = StyleSheet.create({
   main: {
-    padding: 10
-  },
-  container: {
-    padding: 10,
-    alignItems: "center",
+    padding: 20,
+    borderRadius: 10,
+    margin: 10,
+    backgroundColor: "#FFFFFF",
     flexDirection: "row"
   },
-  dataContainer: {
+  bold: { fontWeight: "bold" },
+  middleContainer: {
     flex: 1,
-    padding: 10
+    marginLeft: 30
   },
-  overviewContainer: {},
-  overview: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+  leftContainer: {
     alignItems: "center",
-    marginBottom: 4
+    justifyContent: "center"
+  },
+  rightContainer: {
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
