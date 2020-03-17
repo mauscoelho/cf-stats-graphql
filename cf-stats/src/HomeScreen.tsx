@@ -28,8 +28,8 @@ export default function HomeScreen({ navigation }) {
     await unfollowAthlete(id);
   }
 
-  function onPress(id) {
-    navigation.navigate("Details");
+  function onPress(name, id) {
+    navigation.navigate("Details", { name, id });
   }
 
   function renderContainer() {
@@ -47,9 +47,7 @@ export default function HomeScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
           <FlatList
             data={followingIds}
-            renderItem={item => (
-              <HomeItem id={item.item} onPress={() => onPress(1)} />
-            )}
+            renderItem={item => <HomeItem id={item.item} onPress={onPress} />}
             keyExtractor={item => item}
           />
         </SafeAreaView>

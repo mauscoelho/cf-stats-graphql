@@ -7,11 +7,16 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import HomeScreen from "./src/HomeScreen";
 import DetailsScreen from "./src/DetailsScreen";
 
-const Stack = createStackNavigator();
-
 const client = new ApolloClient({
   uri: "https://yb6kxdnd81.execute-api.us-east-1.amazonaws.com/dev/graphql"
 });
+
+type RootStackParamList = {
+  Home: undefined;
+  Details: { name: string; id: string };
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -20,7 +25,11 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Details" component={DetailsScreen} />
+            <Stack.Screen
+              name="Details"
+              component={DetailsScreen}
+              options={({ route }) => ({ title: route.params.name })}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

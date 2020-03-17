@@ -32,7 +32,9 @@ export default function HomeItem({ id, onPress }) {
   if (error) return <Text>Error :(</Text>;
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      onPress={() => onPress(data.athlete.name, data.athlete.id)}
+    >
       <View style={styles.main}>
         <View style={styles.leftContainer}>
           <Avatar.Image source={{ uri: data.athlete.photo }} />
