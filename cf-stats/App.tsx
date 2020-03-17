@@ -11,7 +11,7 @@ const client = new ApolloClient({
   uri: "https://yb6kxdnd81.execute-api.us-east-1.amazonaws.com/dev/graphql"
 });
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Home: undefined;
   Details: { name: string; id: string };
 };
@@ -24,7 +24,11 @@ export default function App() {
       <PaperProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={() => ({ title: "CF Stats 🏋️‍♀️" })}
+            />
             <Stack.Screen
               name="Details"
               component={DetailsScreen}
