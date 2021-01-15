@@ -42,9 +42,9 @@ const resolvers = {
       return {
         id: data.competitorId,
         name: data.competitorName,
-        affiliate: data.affiliateName
+        affiliate: data.affiliateName,
       };
-    }
+    },
   },
   Athlete: {
     photo: async ({ id }, args, context) => {
@@ -57,23 +57,23 @@ const resolvers = {
     },
     countryEmoji: async ({ id }, args, context) => {
       const { data } = await axios.get(`${apiUrl}/athlete/${id}`);
-      return flag(data.countryId);
+      return data.countryId ? flag(data.countryId) : `﹖`;
     },
     stats: async ({ id }, args, context) => {
       const {
-        data: { stats }
+        data: { stats },
       } = await axios.get(`${apiUrl}/athlete/${id}`);
-      const result = stats.open.map(item => ({
+      const result = stats.open.map((item) => ({
         name: "Open",
         year: item.year,
         worldWideRank: getWolrdWideRank(item),
         affiliateRank: getAffiliateRank(item),
-        countryRank: getCountryRank(item)
+        countryRank: getCountryRank(item),
       }));
 
       return result;
-    }
-  }
+    },
+  },
 };
 
 function getCountryRank(item) {
@@ -94,12 +94,12 @@ function getWolrdWideRank(item) {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
 });
 
 exports.graphqlHandler = server.createHandler({
   cors: {
     origin: "*",
-    credentials: true
-  }
+    credentials: true,
+  },
 });
