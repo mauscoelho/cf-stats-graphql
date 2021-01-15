@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, SafeAreaView } from "react-native";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../App";
 import { gql } from "apollo-boost";
@@ -33,7 +33,7 @@ const ATHLETE_DETAIL = gql`
 
 export default function DetailsScreen(props: Props) {
   const { loading, error, data } = useQuery(ATHLETE_DETAIL, {
-    variables: { id: props.route.params.id }
+    variables: { id: props.route.params.id },
   });
 
   if (loading) return <Text>Loading...</Text>;
@@ -48,6 +48,6 @@ export default function DetailsScreen(props: Props) {
 
 const styles = StyleSheet.create({
   main: {
-    padding: 20
-  }
+    padding: 20,
+  },
 });

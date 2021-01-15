@@ -23,7 +23,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   async function onUnfollow(id) {
-    const newIds = followingIds.filter(item => item !== id);
+    const newIds = followingIds.filter((item) => item !== id);
     setFollowingIds([...newIds]);
     await unfollowAthlete(id);
   }
@@ -38,7 +38,7 @@ export default function HomeScreen({ navigation }) {
         <QueryList
           query={query}
           followingIds={followingIds}
-          onFollow={id => onFollow(id)}
+          onFollow={(id) => onFollow(id)}
         ></QueryList>
       );
     }
@@ -47,8 +47,8 @@ export default function HomeScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
           <FlatList
             data={followingIds}
-            renderItem={item => <HomeItem id={item.item} onPress={onPress} />}
-            keyExtractor={item => item}
+            renderItem={(item) => <HomeItem id={item.item} onPress={onPress} />}
+            keyExtractor={(item) => item}
           />
         </SafeAreaView>
       );
@@ -65,7 +65,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <Searchbar
         placeholder="Search"
-        onChangeText={query => setQuery(query)}
+        onChangeText={(query) => setQuery(query)}
         value={query}
       />
       {renderContainer()}
@@ -75,11 +75,11 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   center: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

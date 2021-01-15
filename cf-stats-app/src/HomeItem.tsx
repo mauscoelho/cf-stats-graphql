@@ -26,7 +26,7 @@ const HOME_ITEM = gql`
 
 export default function HomeItem({ id, onPress }) {
   const { loading, error, data } = useQuery(HOME_ITEM, {
-    variables: { id }
+    variables: { id },
   });
 
   if (loading) return <Text>Loading...</Text>;
@@ -45,10 +45,11 @@ export default function HomeItem({ id, onPress }) {
 
 const styles = StyleSheet.create({
   main: {
+    flex: 1,
     padding: 20,
     borderRadius: 10,
     margin: 10,
     backgroundColor: "#FFFFFF",
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 });

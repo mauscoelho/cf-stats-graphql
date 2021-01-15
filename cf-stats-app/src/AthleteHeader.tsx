@@ -36,20 +36,18 @@ export default function AthleteHeader({ athlete }: Props) {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   bold: { fontWeight: "bold" },
   middleContainer: {
-    flex: 1,
-    marginLeft: 30
+    marginLeft: 30,
   },
   leftContainer: {
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   rightContainer: {
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
