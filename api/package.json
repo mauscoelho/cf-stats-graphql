@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "apollo-server-lambda": "^2.10.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "country-code-emoji": "^1.0.0",
     "graphql": "^14.6.0"
   },
